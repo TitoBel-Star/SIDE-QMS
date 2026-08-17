@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIDE-QMS - Sistema Inteligente de Gestión de Calidad ISO 9001</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-mode">
+  <div class="app-container">
+    
+    <!-- BARRA LATERAL (SIDEBAR) -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">SIDE-QMS</span>
+          <span class="logo-subtitle">ISO 9001:2015 Smart SGC</span>
+        </div>
+      </div>
+      
+      <nav class="sidebar-menu">
+        <button class="menu-item active" data-tab="director-dashboard">
+          <span class="menu-icon"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg></span>
+          <span class="menu-label">Dirección General</span>
+        </button>
+        <button class="menu-item" data-tab="manager-dashboard">
+          <span class="menu-icon"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 2 18 2 18 6 6 6"></polygon><rect x="3" y="6" width="18" height="16" rx="2"></rect><line x1="10" y1="12" x2="14" y2="12"></line></line></svg></span>
+          <span class="menu-label">Gestión por Área</span>
+        </button>
+        <button class="menu-item" data-tab="doc-explorer">
+          <span class="menu-icon"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+          <span class="menu-label">Explorador Documental</span>
+        </button>
+        <button class="menu-item" data-tab="trace-matrix">
+          <span class="menu-icon"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></span>
+          <span class="menu-label">Trazabilidad Total</span>
+        </button>
+        <button class="menu-item" data-tab="audits-panel">
+          <span class="menu-icon"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></span>
+          <span class="menu-label">Auditorías</span>
+        </button>
+        <button class="menu-item" data-tab="capa-panel">
+          <span class="menu-icon"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span>
+          <span class="menu-label">Acciones CAPA</span>
+          <span class="badge badge-danger id-nc-count">0</span>
+        </button>
+        <button class="menu-item" data-tab="risks-kpis">
+          <span class="menu-icon"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></span>
+          <span class="menu-label">Riesgos e Indicadores</span>
+        </button>
+        <button class="menu-item" data-tab="ai-hub">
+          <span class="menu-icon"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></span>
+          <span class="menu-label">Centro de IA</span>
+        </button>
+        <button class="menu-item" data-tab="expiry-config">
+          <span class="menu-icon"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span>
+          <span class="menu-label">Alertas y Vencimientos</span>
+        </button>
+        <button class="menu-item" data-tab="process-mining">
+          <span class="menu-icon"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg></span>
+          <span class="menu-label">Minería de Procesos</span>
+        </button>
+        <button class="menu-item" data-tab="sgc-matrix">
+          <span class="menu-icon"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg></span>
+          <span class="menu-label">Matriz SGC 360°</span>
+        </button>
+        <button class="menu-item" data-tab="help-center">
+          <span class="menu-icon"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1C14.83 12 12 13 12 13"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span>
+          <span class="menu-label">Manual y Guías</span>
+        </button>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="user-role-selector-container">
+          <label for="role-select">Rol Activo:</label>
+          <select id="role-select">
+            <option value="Director">Director General</option>
+            <option value="Gerente">Gerente de Área</option>
+            <option value="Supervisor">Supervisor SGC</option>
+            <option value="Auditor">Auditor de Calidad</option>
+            <option value="Empleado">Colaborador / Operador</option>
+            <option value="Admin">Administrador General</option>
+          </select>
+        </div>
+        <div style="margin-top: 10px; width: 100%;">
+          <button class="btn btn-danger btn-xs w-full" id="btn-reset-qms-db" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; font-size: 0.65rem; padding: 6px 10px; display: flex; align-items: center; justify-content: center; gap: 4px; border-radius: 6px; cursor: pointer; transition: all 0.2s; width: 100%;">
+            <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-right:2px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            Limpiar Registros SGC
+          </button>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+      
+      <!-- ENCABEZADO SUPERIOR -->
+      <header class="app-header">
+        <div class="header-left">
+          <h1 id="page-title">Dirección General</h1>
+          <p id="page-subtitle" class="text-muted">Análisis en tiempo real de la Arquitectura Documental y el SGC</p>
+        </div>
+        <div class="header-right">
+          <div class="system-time" id="clock">00:00:00</div>
+          
+          <div class="notifications-wrapper">
+            <button class="icon-btn" id="notifications-toggle" title="Centro de Notificaciones">
+              <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+              <span class="notification-indicator" id="notif-badge">3</span>
+            </button>
+            <div class="notifications-dropdown" id="notifications-panel">
+              <div class="notif-header">
+                <h4>Notificaciones Recientes</h4>
+                <button class="text-btn text-xs" id="clear-notifications">Limpiar todas</button>
+              </div>
+              <div class="notif-list" id="notifications-list">
+                <!-- Se poblará dinámicamente -->
+              </div>
+            </div>
+          </div>
+          
+          <div class="user-profile" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+            <div style="display: flex; align-items: center;">
+              <div class="user-avatar" id="user-avatar-text">DG</div>
+              <div class="user-info" style="margin-left: 8px;">
+                <span class="user-name" id="user-profile-name">Ing. Emilio R.</span>
+                <span class="user-tag" id="user-profile-role">Director</span>
+              </div>
+            </div>
+            <button id="btn-logout" title="Cerrar Sesión" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; cursor: pointer; font-size: 0.85rem; padding: 6px 12px; border-radius: 20px; display: flex; align-items: center; gap: 6px; outline: none; margin-left: 12px; transition: all 0.2s; font-weight: 500;">
+              <i data-feather="log-out" style="width: 14px; height: 14px;"></i>
+              <span>Salir</span>
+            </button>
+          </div>
+        </div>
+      </header>
+      
+      <!-- PESTAÑAS DE CONTENIDO DINÁMICO -->
+      <div class="content-body">
+        
+        <!-- VISTA 1: DASHBOARD DIRECTOR -->
+        <section id="director-dashboard" class="tab-content active">
+          <!-- Tarjetas de Resumen KPI -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-title">Cumplimiento ISO 9001</span>
+                <span class="stat-icon text-success"><svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></span>
+              </div>
+              <div class="stat-number" id="dir-compliance-rate">0.0%</div>
+              <div class="stat-progress">
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill bg-success" id="dir-compliance-bar" style="width: 0%"></div>
+                </div>
+              </div>
+              <div class="stat-footer text-success">
+                <span>🟢 Sistema en estado operativo óptimo</span>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-title">Cobertura Documental</span>
+                <span class="stat-icon text-info"><svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></span>
+              </div>
+              <div class="stat-number" id="dir-doc-count">0/0</div>
+              <div class="stat-desc">Macroprocesos, POEs, ITs y Registros</div>
+              <div class="stat-footer text-muted">
+                <span>Versiones inmutables vigentes</span>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-title">Auditorías e Incidencias</span>
+                <span class="stat-icon text-warning"><svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg></span>
+              </div>
+              <div class="stat-number" id="dir-nc-count">0 NC</div>
+              <div class="stat-desc"><span id="dir-active-audits">0</span> Auditorías Realizadas</div>
+              <div class="stat-footer text-danger" id="dir-capa-warning">
+                <span>0 Acciones CAPA Pendientes</span>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-title">Riesgos y Mitigación</span>
+                <span class="stat-icon text-danger"><svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></span>
+              </div>
+              <div class="stat-number" id="dir-high-risks">0</div>
+              <div class="stat-desc">Riesgos de Nivel Alto sin mitigar</div>
+              <div class="stat-footer text-success">
+                <span>100% Controles activos</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Semáforos e Historial de Desviaciones -->
+          <div class="dashboard-grid">
+            <div class="panel-card col-span-2">
+              <div class="panel-header">
+                <h3>Semáforo en Tiempo Real del SGC</h3>
+                <div class="panel-actions">
+                  <span class="badge badge-outline">ISO 9001:2015</span>
+                </div>
+              </div>
+              <div class="traffic-light-grid" id="traffic-light-container">
+                <!-- Se poblará dinámicamente -->
+              </div>
+            </div>
+            
+            <div class="panel-card">
+              <div class="panel-header">
+                <h3>IA Resumen Ejecutivo Diario</h3>
+                <button class="btn btn-secondary btn-xs" id="quick-generate-summary">Re-Analizar</button>
+              </div>
+              <div class="ai-summary-widget">
+                <div class="ai-glow-border"></div>
+                <div class="ai-widget-content">
+                  <div class="ai-avatar-row">
+                    <div class="ai-pulse-dot"></div>
+                    <span class="ai-widget-badge">AGY IA Quality Assistant</span>
+                  </div>
+                  <div id="ai-quick-summary-text" class="ai-markdown-preview">
+                    <!-- Se cargará un resumen inicial -->
+                    Generando diagnóstico del sistema de gestión...
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Segunda Fila: Últimas CAPA y Récord de Operación Abreviados -->
+          <div class="dashboard-grid m-t-4" style="margin-top: 20px;">
+            <!-- Panel: Últimas Acciones CAPA -->
+            <div class="panel-card">
+              <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
+                <h3>Últimas Acciones CAPA</h3>
+                <span class="badge badge-danger id-nc-count">0</span>
+              </div>
+              <div style="padding: 14px; max-height: 250px; overflow-y: auto;">
+                <table class="data-table text-xs w-full">
+                  <thead>
+                    <tr>
+                      <th style="padding: 6px; text-align: left;">Proceso</th>
+                      <th style="padding: 6px; text-align: left;">Responsable</th>
+                      <th style="padding: 6px; text-align: left;">Estatus</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dir-recent-capa-tbody">
+                    <tr><td colspan="3" class="text-center text-muted p-3">No hay CAPAs registradas.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Panel: Récord de Operación Abreviado -->
+            <div class="panel-card col-span-2">
+              <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
+                <h3>Récord de Operación Abreviado (Uso SGC)</h3>
+                <button onclick="switchTab('risks-kpis')" class="btn btn-xs btn-secondary" style="font-size:0.65rem; padding: 3px 8px; border-radius: 4px;">Ver Récord Completo</button>
+              </div>
+              <div style="padding: 14px; max-height: 250px; overflow-y: auto;">
+                <table class="data-table text-xs w-full">
+                  <thead>
+                    <tr>
+                      <th style="padding: 6px; text-align: left;">Área</th>
+                      <th style="padding: 6px; text-align: left;">Procedimiento</th>
+                      <th style="padding: 6px; text-align: right;">Accesos</th>
+                      <th style="padding: 6px; text-align: right;">Estatus</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dir-mini-usage-tbody">
+                    <!-- Se llena con los 5 POEs con más interacciones -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- VISTA 2: DASHBOARD GERENTE -->
+        <section id="manager-dashboard" class="tab-content">
+          <div class="manager-controls">
+            <div class="area-filter-wrapper">
+              <label for="manager-area-select">Seleccionar Área de Gestión:</label>
+              <div class="custom-tab-buttons">
+                <button class="area-tab-btn active" data-area="ADM">Administración y Finanzas</button>
+                <button class="area-tab-btn" data-area="COM">Comercialización</button>
+                <button class="area-tab-btn" data-area="LOG">Logística y Compras</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="stats-grid m-t-4">
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-title">Cumplimiento de Área</span>
+                <span class="stat-icon" id="mgr-area-icon"></span>
+              </div>
+              <div class="stat-number" id="mgr-compliance">0%</div>
+              <div class="stat-progress">
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill" id="mgr-compliance-bar" style="width: 0%"></div>
+                </div>
+              </div>
+              <div class="stat-footer text-muted" id="mgr-area-name">
+                Cargando área...
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-title">Procedimientos (POEs)</span>
+              </div>
+              <div class="stat-number" id="mgr-poe-count">0</div>
+              <div class="stat-desc" id="mgr-it-count">0 Instructivos (IT) vinculados</div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-title">Registros del Área</span>
+              </div>
+              <div class="stat-number" id="mgr-reg-count">0</div>
+              <div class="stat-desc" id="mgr-filled-reg-count">0 registros completados</div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-title">Auditorías y CAPA</span>
+              </div>
+              <div class="stat-number text-danger" id="mgr-nc-count">0 NC</div>
+              <div class="stat-desc" id="mgr-pending-audits">0 Auditorías programadas</div>
+            </div>
+          </div>
+          
+          <div class="dashboard-grid m-t-4">
+            <div class="panel-card col-span-2">
+              <div class="panel-header">
+                <h3>Procedimientos de la Gerencia</h3>
+                <div class="panel-actions">
+                  <input type="text" placeholder="Buscar procedimiento..." class="input-search" id="mgr-poe-search">
+                </div>
+              </div>
+              <div class="table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Código</th>
+                      <th>Procedimiento</th>
+                      <th>Estado</th>
+                      <th>Versión</th>
+                      <th>Responsable</th>
+                      <th>Rendimiento</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="mgr-poe-table-body">
+                    <!-- Se llena dinámicamente -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+              <!-- Tarjeta SIPOC -->
+              <div class="panel-card">
+                <div class="panel-header flex-row justify-between align-center" style="display:flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
+                  <h3 style="font-size: 0.95rem;">Monitoreo de Calidad SIPOC (Área)</h3>
+                  <span class="badge bg-primary" id="sipoc-area-efficiency" style="font-size: 0.65rem; padding: 2px 6px;">Calidad: --</span>
+                </div>
+                <div style="padding: 12px;">
+                  <!-- Controles de Filtro de Alcance SIPOC -->
+                  <div style="display: flex; gap: 6px; margin-bottom: 10px; align-items: center;">
+                    <select id="sipoc-scope-filter" class="input-select text-xs" style="padding: 4px 8px; font-size: 0.65rem; flex: 1.5; background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.1); height: 28px; line-height: 1;">
+                      <option value="area">Área Seleccionada</option>
+                      <option value="all">Consolidado (Toda la Empresa)</option>
+                      <option value="process">Por Proceso Específico...</option>
+                    </select>
+                    <select id="sipoc-process-select" class="input-select text-xs" style="padding: 4px 8px; font-size: 0.65rem; flex: 1.5; background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.1); height: 28px; line-height: 1; display: none;">
+                      <!-- Se llena dinámicamente -->
+                    </select>
+                  </div>
+
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 8px; text-align: center;">
+                      <div style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; font-weight:600;">Tiempo Ciclo Medio</div>
+                      <div style="font-size: 1.1rem; font-weight: 700; color: #60a5fa; margin-top: 2px;" id="sipoc-area-avg-time">-- min</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 8px; text-align: center;">
+                      <div style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; font-weight:600;">Conformidad Entregables</div>
+                      <div style="font-size: 1.1rem; font-weight: 700; color: #34d399; margin-top: 2px;" id="sipoc-area-avg-quality">-- %</div>
+                    </div>
+                  </div>
+                  
+                  <h5 style="font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Últimas Mediciones de Procesos</h5>
+                  <div id="sipoc-area-logs-mini" style="max-height: 140px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; background: rgba(0,0,0,0.15);">
+                    <!-- Lista mini de logs SIPOC del área -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tarjeta Alertas -->
+              <div class="panel-card">
+                <div class="panel-header">
+                  <h3>Alertas Pendientes del Área</h3>
+                </div>
+                <div class="alert-list-vertical" id="mgr-alerts-list">
+                  <!-- Alertas específicas del área -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- VISTA 3: EXPLORADOR DOCUMENTAL -->
+        <section id="doc-explorer" class="tab-content">
+          <div class="explorer-container">
+            <!-- Columna Izquierda: Árbol de navegación -->
+            <div class="explorer-sidebar">
+              <div class="explorer-search-box">
+                <input type="text" placeholder="Buscar código o palabra clave..." id="explorer-global-search">
+              </div>
+              <div class="explorer-tree" id="explorer-document-tree">
+                <!-- Estructura jerárquica interactiva -->
+              </div>
+            </div>
+            
+            <!-- Columna Derecha: Ficha de Detalle de Documento -->
+            <div class="explorer-detail-pane" id="explorer-detail-pane">
+              <div class="empty-state">
+                <div class="empty-state-icon">
+                  <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                </div>
+                <h3>Explorador Documental Jerárquico</h3>
+                <p>Selecciona un elemento de la estructura de 5 niveles a la izquierda para visualizar sus detalles técnicos, KPIs, matriz de riesgos, ciclo de vida e historial de auditoría.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- VISTA 4: MATRIZ DE TRAZABILIDAD -->
+        <section id="trace-matrix" class="tab-content">
+          <div class="trace-matrix-selector" style="display: flex; flex-direction: column; gap: 8px; max-width: 800px;">
+            <label for="trace-poe-select">Seleccionar Procedimiento Operativo Estandarizado (POE):</label>
+            <div style="display: flex; gap: 10px; width: 100%;">
+              <select id="trace-area-filter" class="input-select" style="flex: 1; padding: 8px 12px; font-size: 0.8rem;">
+                <option value="all">Todas las Gerencias</option>
+                <option value="ADM">Administración y Finanzas</option>
+                <option value="COM">Comercialización</option>
+                <option value="LOG">Logística y Compras</option>
+              </select>
+              <input type="text" id="trace-search-input" placeholder="🔍 Buscar por código o nombre de proceso..." class="input-text" style="flex: 1.2; padding: 8px 12px; font-size: 0.8rem;">
+              <select id="trace-poe-select" class="input-select" style="flex: 1.8; padding: 8px 12px; font-size: 0.8rem;">
+                <!-- Cargado dinámicamente -->
+              </select>
+            </div>
+          </div>
+          
+          <div class="trace-flow-container" id="trace-flow-container">
+            <!-- Se dibuja el flujo jerárquico completo -->
+          </div>
+        </section>
+        
+        <!-- VISTA 5: AUDITORÍAS -->
+        <section id="audits-panel" class="tab-content">
+          <div class="dashboard-grid">
+            <div class="panel-card col-span-2">
+              <div class="panel-header">
+                <h3>Historial de Auditorías de Calidad</h3>
+                <div class="panel-actions">
+                  <button class="btn btn-primary" id="btn-start-audit">Nueva Auditoría Interna</button>
+                </div>
+              </div>
+              <div class="table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>ID Auditoría</th>
+                      <th>Procedimiento</th>
+                      <th>Fecha</th>
+                      <th>Auditor</th>
+                      <th>Puntuación</th>
+                      <th>Estatus</th>
+                      <th>No Conformidades</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="audits-table-body">
+                    <!-- Se llena dinámicamente -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            <div class="panel-card">
+              <div class="panel-header">
+                <h3>Estado y Planificación de Auditoría</h3>
+              </div>
+              <div class="audit-summary-stats">
+                <div class="compliance-circle-container">
+                  <div class="compliance-circle" id="audit-score-circle">
+                    <span class="compliance-value" id="audit-average-score">0</span>
+                    <span class="compliance-label">Puntaje Promedio</span>
+                  </div>
+                </div>
+                <div class="stat-list">
+                  <div class="stat-list-item">
+                    <span>Auditorías Cerradas</span>
+                    <strong class="text-success" id="audit-closed-count">0</strong>
+                  </div>
+                  <div class="stat-list-item">
+                    <span>Auditorías en Seguimiento</span>
+                    <strong class="text-warning" id="audit-followup-count">0</strong>
+                  </div>
+                  <div class="stat-list-item">
+                    <span>No Conformidades Detectadas</span>
+                    <strong class="text-danger" id="audit-nc-detected-count">0</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- VISTA 6: ACCIONES CAPA -->
+        <section id="capa-panel" class="tab-content">
+          <div class="panel-card">
+            <div class="panel-header">
+              <h3>Plan de Acciones Correctivas y Preventivas (CAPA)</h3>
+              <div class="panel-actions">
+                <button class="btn btn-secondary" id="btn-new-capa">Crear Acción CAPA Manual</button>
+              </div>
+            </div>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Procedimiento Afectado</th>
+                    <th>Descripción de No Conformidad</th>
+                    <th>Acción Correctiva</th>
+                    <th>Responsable</th>
+                    <th>Límite</th>
+                    <th>Prioridad</th>
+                    <th>Costo Est.</th>
+                    <th>Estatus</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="capa-table-body">
+                  <!-- Se llena dinámicamente -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        
+        <!-- VISTA 7: RIESGOS E INDICADORES -->
+        <section id="risks-kpis" class="tab-content">
+          <div class="dashboard-grid">
+            
+            <!-- Matriz de Riesgos -->
+            <div class="panel-card col-span-2" id="risk-matrix-panel">
+              <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 10px;">
+                <h3>Matriz de Riesgos (ISO 9001 - Numeral 6.1)</h3>
+                <div style="display:flex; align-items:center; gap: 8px;">
+                  <button onclick="document.getElementById('poe-usage-panel').scrollIntoView({ behavior: 'smooth' })" class="btn btn-sm btn-secondary" style="padding: 5px 10px; font-size: 0.75rem; display: flex; align-items: center; gap: 4px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); cursor: pointer; border-radius: 6px; color: var(--text-secondary); transition: all 0.2s;">
+                    📊 Ir a Récord de Uso
+                  </button>
+                  <select id="risk-area-filter" style="background-color: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); color: var(--text-primary); padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; outline: none; transition: background-color 0.2s;">
+                    <option value="ALL">Todas las Áreas</option>
+                    <option value="ADM">Administración (ADM)</option>
+                    <option value="COM">Comercialización (COM)</option>
+                    <option value="LOG">Logística (LOG)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="risk-heatmap-container">
+                <div class="heatmap-grid">
+                  <div class="heatmap-label-y">Impacto</div>
+                  <div class="heatmap-cells">
+                    <!-- Fila 5 -->
+                    <div class="heatmap-cell bg-orange" data-prob="1" data-imp="5">1x5</div>
+                    <div class="heatmap-cell bg-red" data-prob="2" data-imp="5">2x5</div>
+                    <div class="heatmap-cell bg-red" data-prob="3" data-imp="5">3x5</div>
+                    <div class="heatmap-cell bg-red" data-prob="4" data-imp="5">4x5</div>
+                    <div class="heatmap-cell bg-red" data-prob="5" data-imp="5">5x5</div>
+                    <!-- Fila 4 -->
+                    <div class="heatmap-cell bg-yellow" data-prob="1" data-imp="4">1x4</div>
+                    <div class="heatmap-cell bg-orange" data-prob="2" data-imp="4">2x4</div>
+                    <div class="heatmap-cell bg-red" data-prob="3" data-imp="4">3x4</div>
+                    <div class="heatmap-cell bg-red" data-prob="4" data-imp="4">4x4</div>
+                    <div class="heatmap-cell bg-red" data-prob="5" data-imp="4">5x4</div>
+                    <!-- Fila 3 -->
+                    <div class="heatmap-cell bg-green" data-prob="1" data-imp="3">1x3</div>
+                    <div class="heatmap-cell bg-yellow" data-prob="2" data-imp="3">2x3</div>
+                    <div class="heatmap-cell bg-orange" data-prob="3" data-imp="3">3x3</div>
+                    <div class="heatmap-cell bg-red" data-prob="4" data-imp="3">4x3</div>
+                    <div class="heatmap-cell bg-red" data-prob="5" data-imp="3">5x3</div>
+                    <!-- Fila 2 -->
+                    <div class="heatmap-cell bg-green" data-prob="1" data-imp="2">1x2</div>
+                    <div class="heatmap-cell bg-green" data-prob="2" data-imp="2">2x2</div>
+                    <div class="heatmap-cell bg-yellow" data-prob="3" data-imp="2">3x2</div>
+                    <div class="heatmap-cell bg-orange" data-prob="4" data-imp="2">4x2</div>
+                    <div class="heatmap-cell bg-red" data-prob="5" data-imp="2">5x2</div>
+                    <!-- Fila 1 -->
+                    <div class="heatmap-cell bg-green" data-prob="1" data-imp="1">1x1</div>
+                    <div class="heatmap-cell bg-green" data-prob="2" data-imp="1">2x1</div>
+                    <div class="heatmap-cell bg-green" data-prob="3" data-imp="1">3x1</div>
+                    <div class="heatmap-cell bg-yellow" data-prob="4" data-imp="1">4x1</div>
+                    <div class="heatmap-cell bg-orange" data-prob="5" data-imp="1">5x1</div>
+                  </div>
+                  <div class="heatmap-label-x">Probabilidad</div>
+                </div>
+                <div class="risk-legend">
+                  <span class="legend-item"><span class="legend-color bg-green"></span> Bajo (1-3)</span>
+                  <span class="legend-item"><span class="legend-color bg-yellow"></span> Tolerable (4)</span>
+                  <span class="legend-item"><span class="legend-color bg-orange"></span> Medio (5-9)</span>
+                  <span class="legend-item"><span class="legend-color bg-red"></span> Alto (10-25)</span>
+                </div>
+              </div>
+              <div class="risk-list m-t-4" id="risk-list-table-container">
+                <!-- Tabla abreviada de riesgos cargados -->
+              </div>
+            </div>
+            
+            <!-- Matriz de KPIs -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <h3>Matriz de Indicadores de Calidad (KPIs)</h3>
+              </div>
+              <div class="kpi-matrix-list" id="kpi-matrix-container">
+                <!-- Se poblará dinámicamente -->
+              </div>
+            </div>
+            
+            <!-- Récord de Operación de Procedimientos (Eficiencia y Uso del SGC) -->
+            <div class="panel-card" id="poe-usage-panel" style="grid-column: span 3; margin-top: 20px;">
+              <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 10px;">
+                <h3>Récord de Operación por Procedimiento (Uso y Eficiencia)</h3>
+                <div style="display:flex; align-items:center; gap: 12px; flex-wrap: wrap;">
+                  <button onclick="document.getElementById('risk-matrix-panel').scrollIntoView({ behavior: 'smooth' })" class="btn btn-sm btn-secondary" style="padding: 5px 10px; font-size: 0.75rem; display: flex; align-items: center; gap: 4px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); cursor: pointer; border-radius: 6px; color: var(--text-secondary); transition: all 0.2s;">
+                    📈 Volver a Matriz
+                  </button>
+                  <select id="poe-usage-area-filter" style="background-color: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); color: var(--text-primary); padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; outline: none; transition: background-color 0.2s;">
+                    <option value="ALL">Todas las Áreas</option>
+                    <option value="ADM">Administración (ADM)</option>
+                    <option value="COM">Comercialización (COM)</option>
+                    <option value="LOG">Logística (LOG)</option>
+                  </select>
+                  <span class="badge bg-primary" id="poe-usage-total-badge" style="font-size:0.75rem; padding: 4px 10px;">Interacciones Totales: 0</span>
+                </div>
+              </div>
+              <p class="text-xs text-muted" style="margin: 0 0 12px 14px;">Este registro monitorea en tiempo real cuántas veces el personal ha entrado a trabajar, auditado o registrado evidencias para cada procedimiento. Permite auditar el cumplimiento del uso del SGC.</p>
+              <div style="max-height: 350px; overflow-y: auto; padding: 0 14px 14px 14px;">
+                <table class="data-table text-xs w-full" style="border-collapse: collapse; width:100%;">
+                  <thead>
+                    <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02); position: sticky; top: 0; z-index: 10;">
+                      <th style="padding: 8px 10px; text-align: left; width: 10%;">Área</th>
+                      <th style="padding: 8px 10px; text-align: left; width: 15%;">Código POE</th>
+                      <th style="padding: 8px 10px; text-align: left; width: 45%;">Procedimiento (POE)</th>
+                      <th style="padding: 8px 10px; text-align: right; width: 15%;">Accesos de Trabajo</th>
+                      <th style="padding: 8px 10px; text-align: right; width: 15%;">Estado de Uso</th>
+                    </tr>
+                  </thead>
+                  <tbody id="poe-usage-table-body">
+                    <!-- Cargado dinámicamente -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+          </div>
+        </section>
+        
+        <!-- VISTA 8: CENTRO DE IA -->
+        <section id="ai-hub" class="tab-content">
+          <div class="ai-hub-container">
+            <div class="ai-settings-card">
+              <div class="ai-pulse-large"></div>
+              <h3>Asistente Inteligente SIDE-QMS</h3>
+              <p class="text-sm text-muted">La IA analiza diariamente desviaciones, inactividades, vencimientos y KPIs fuera de los límites de control, compilando resúmenes ejecutivos automatizados.</p>
+              
+              <div class="ai-options-form">
+                <label for="ai-report-type">Tipo de Reporte a Generar:</label>
+                <select id="ai-report-type" class="input-select">
+                  <option value="daily">Resumen Ejecutivo Diario (Calidad y Control)</option>
+                  <option value="weekly">Reporte Ejecutivo Semanal de Operaciones</option>
+                  <option value="monthly">Auditoría Ejecutiva Mensual SGC</option>
+                  <option value="annual">Balance Anual y Plan de Mejora Continua</option>
+                </select>
+                <button class="btn btn-primary" id="btn-generate-ai-report">Generar Reporte con IA</button>
+              </div>
+            </div>
+            
+            <div class="ai-result-card">
+              <div class="panel-header">
+                <h3>Reporte Ejecutivo Generado</h3>
+                <div class="panel-actions">
+                  <button class="btn btn-secondary btn-xs" id="btn-print-report">Exportar PDF</button>
+                  <button class="btn btn-secondary btn-xs" id="btn-excel-report">Exportar Excel</button>
+                </div>
+              </div>
+              <div class="ai-report-output" id="ai-report-output-content">
+                <!-- Salida del reporte estructurado en formato markdown -->
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- VISTA 9: ALERTAS Y VENCIMIENTOS -->
+        <section id="expiry-config" class="tab-content">
+          <div class="dashboard-grid">
+            <div class="panel-card col-span-2">
+              <div class="panel-header">
+                <h3>Motor Automático de Alertas de Vencimiento</h3>
+                <div class="panel-actions">
+                  <button class="btn btn-primary" id="btn-trigger-daily-check">Ejecutar Simulación Diaria</button>
+                </div>
+              </div>
+              <div class="alert-matrix-info">
+                <p class="text-sm">El motor de control monitorea los plazos de vencimiento y auditoría de todos los procedimientos, activando notificaciones según las siguientes reglas de negocio:</p>
+                <div class="alert-rules-timeline">
+                  <div class="rule-step">
+                    <div class="rule-icon" style="background-color: var(--color-primary); color: #fff;">30d</div>
+                    <div class="rule-body"><strong>Notificación Temprana:</strong> Correo electrónico al propietario del POE.</div>
+                  </div>
+                  <div class="rule-step">
+                    <div class="rule-icon" style="background-color: var(--color-warning); color: #000;">15d</div>
+                    <div class="rule-body"><strong>Recordatorio Medio:</strong> Correo electrónico + WhatsApp al propietario.</div>
+                  </div>
+                  <div class="rule-step">
+                    <div class="rule-icon" style="background-color: #ea580c; color: #fff;">7d</div>
+                    <div class="rule-body"><strong>Advertencia Crítica:</strong> Notificación Push en panel de control.</div>
+                  </div>
+                  <div class="rule-step">
+                    <div class="rule-icon" style="background-color: var(--color-danger); color: #fff;">Hoy</div>
+                    <div class="rule-body"><strong>Escalamiento 1:</strong> Notificación Directa al Gerente de Área.</div>
+                  </div>
+                  <div class="rule-step">
+                    <div class="rule-icon" style="background-color: #991b1b; color: #fff; width: auto; min-width: 32px; padding: 0 8px; border-radius: 16px; font-size: 0.65rem;">Atrasado</div>
+                    <div class="rule-body"><strong>Escalamiento 2 (Crítico):</strong> Alerta Roja al Director General.</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="table-container m-t-4">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+                  <h4 style="margin: 0;">Vencimientos de Auditorías en los Próximos 45 Días</h4>
+                  <input type="text" id="expiry-table-search" placeholder="Buscar procedimiento (ej: ADM, COM, vencido)..." style="background-color: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); color: var(--text-primary); padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; width: 250px; outline: none; transition: border-color 0.2s;">
+                </div>
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Código POE</th>
+                      <th>Procedimiento</th>
+                      <th>Área</th>
+                      <th>Última Auditoría</th>
+                      <th>Próxima Auditoría</th>
+                      <th>Días Restantes</th>
+                      <th>Estado Alerta</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="expiry-table-body">
+                    <!-- Poblado dinámicamente -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            <!-- Simulador de Notificaciones Recibidas -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <h3>Consola de Notificaciones Activas</h3>
+              </div>
+              <div class="notification-consoles" id="simulated-channels-container">
+                <!-- Contenedores con estilo móvil simulando WhatsApp, Teams, push, etc. -->
+                <div class="mock-phone">
+                  <div class="phone-screen">
+                    <div class="phone-header">
+                      <span class="phone-time">14:40</span>
+                      <span class="phone-icons">📶 🔋</span>
+                    </div>
+                    <div class="phone-content" id="mock-phone-alerts">
+                      <div class="phone-empty">No hay alertas activas en dispositivo móvil.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- VISTA 11: MINERÍA DE PROCESOS -->
+        <section id="process-mining" class="tab-content">
+          <div class="dashboard-grid">
+            
+            <!-- Tarjeta de Controles e Inyección -->
+            <div class="panel-card col-span-2">
+              <div class="panel-header">
+                <h3>Consola de Minería de Procesos (Process Mining)</h3>
+                <div class="panel-actions">
+                  <button class="btn btn-primary" id="btn-inject-mining-events">Simular Inyección de 100 Casos</button>
+                </div>
+              </div>
+              <div class="p-4 flex-row gap-4 align-center">
+                <div class="form-group flex-1" style="position: relative;">
+                  <label>Procedimiento a Analizar:</label>
+                  <select id="mining-poe-select" style="display: none;"></select>
+                  <div class="custom-dropdown m-t-1" id="mining-poe-dropdown-container" style="position: relative; width: 100%;">
+                    <button type="button" class="input-select" id="mining-poe-dropdown-btn" style="text-align: left; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: rgba(255,255,255,0.03); width: 100%;">
+                      <span id="mining-poe-dropdown-label">Cargando procedimientos...</span>
+                      <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" id="mining-poe-dropdown-arrow" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="custom-dropdown-menu" id="mining-poe-dropdown-menu" style="display: none; position: absolute; top: 100%; left: 0; width: 100%; max-height: 350px; overflow-y: auto; background: #111827; border: 1px solid var(--border-color); border-radius: 8px; z-index: 1000; box-shadow: 0 10px 25px rgba(0,0,0,0.5); margin-top: 5px;">
+                      <div style="padding: 10px; border-bottom: 1px solid var(--border-color); background: #1f2937; position: sticky; top: 0; z-index: 10;">
+                        <input type="text" id="mining-dropdown-search" placeholder="Buscar procedimiento (ej: COM, arqueo)..." style="width: 100%; padding: 6px 12px; font-size: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 6px; color: #fff; outline: none; transition: border-color 0.2s;">
+                      </div>
+                      <div class="dropdown-group" data-area="GLOBAL">
+                        <div class="dropdown-group-header" style="padding: 10px 14px; background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600; color: #10b981; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none;">
+                          <span>Consolidados (Área y Total SGC)</span>
+                          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;" class="group-arrow"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                        <div class="dropdown-group-items" id="items-mining-GLOBAL" style="display: none; flex-direction: column;"></div>
+                      </div>
+                      <div class="dropdown-group" data-area="ADM">
+                        <div class="dropdown-group-header" style="padding: 10px 14px; background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600; color: #60a5fa; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none;">
+                          <span>Administración y Finanzas (ADM)</span>
+                          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;" class="group-arrow"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                        <div class="dropdown-group-items" id="items-mining-ADM" style="display: none; flex-direction: column;"></div>
+                      </div>
+                      <div class="dropdown-group" data-area="COM">
+                        <div class="dropdown-group-header" style="padding: 10px 14px; background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600; color: #60a5fa; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none;">
+                          <span>Comercialización (COM)</span>
+                          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;" class="group-arrow"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                        <div class="dropdown-group-items" id="items-mining-COM" style="display: none; flex-direction: column;"></div>
+                      </div>
+                      <div class="dropdown-group" data-area="LOG">
+                        <div class="dropdown-group-header" style="padding: 10px 14px; background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600; color: #60a5fa; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none;">
+                          <span>Logística y Compras (LOG)</span>
+                          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;" class="group-arrow"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                        <div class="dropdown-group-items" id="items-mining-LOG" style="display: none; flex-direction: column;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex-1 text-sm text-muted">
+                  Selecciona un procedimiento operativo estandarizado para reconstruir su flujo de ejecución a partir de los registros de eventos de calidad e identificar desviaciones de cumplimiento o retrasos (cuellos de botella).
+                </div>
+              </div>
+            </div>
+
+            <!-- Panel de KPIs de Minería -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <h3>Métricas de Rendimiento</h3>
+              </div>
+              <div class="p-4 text-sm flex-col gap-3">
+                <div class="metric-row">
+                  <span class="text-muted">Tiempo Medio de Ciclo:</span>
+                  <strong class="pull-right" id="mining-kpi-cycle-time">--</strong>
+                </div>
+                <div class="metric-row">
+                  <span class="text-muted">Conformidad de Ruta:</span>
+                  <strong class="pull-right" id="mining-kpi-conformance">--</strong>
+                </div>
+                <div class="metric-row">
+                  <span class="text-muted">Casos Totales Analizados:</span>
+                  <strong class="pull-right" id="mining-kpi-cases">0</strong>
+                </div>
+                <div class="metric-row">
+                  <span class="text-muted">Punto de Estrangulamiento:</span>
+                  <strong class="pull-right text-danger" id="mining-kpi-bottleneck" style="font-weight:600">Ninguno</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Guía de Operación e Interpretación -->
+            <div class="panel-card col-span-3" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.7) 100%); border-left: 4px solid var(--primary-color);">
+              <div class="panel-header" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">
+                <h3>💡 Guía de Operación e Interpretación</h3>
+              </div>
+              <div class="p-4 text-xs flex-col gap-3">
+                <p style="font-size: 0.8rem; line-height: 1.4; color: var(--text-secondary);">
+                  <strong>¿Qué es la Minería de Procesos?</strong> Es una herramienta analítica que recopila los logs de auditoría, firmas y registros reales para reconstruir visualmente el flujo operativo de la empresa. Te permite contrastar la práctica diaria contra el estándar normativo de la norma ISO 9001:2015.
+                </p>
+                <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 5px;">
+                  <div>
+                    <h5 class="text-primary m-b-1" style="font-weight: 600; font-size: 0.85rem;">1. Selecciona un Proceso</h5>
+                    <p class="text-muted" style="line-height: 1.3;">Elige en el selector superior el procedimiento a analizar. Tienes disponibles los 132 POEs cargados de ADM, COM y LOG.</p>
+                  </div>
+                  <div>
+                    <h5 class="text-primary m-b-1" style="font-weight: 600; font-size: 0.85rem;">2. Simula e Inyecta Casos</h5>
+                    <p class="text-muted" style="line-height: 1.3;">Si no hay datos, haz clic en el botón azul <strong>"Simular Inyección de 100 Casos"</strong> arriba. Esto generará la actividad de 20 días de registros y firmas.</p>
+                  </div>
+                  <div>
+                    <h5 class="text-primary m-b-1" style="font-weight: 600; font-size: 0.85rem;">3. Detecta Cuellos de Botella</h5>
+                    <p class="text-muted" style="line-height: 1.3;">Las flechas rojas animadas indican transiciones lentas. El nodo con contorno naranja indica dónde se encuentra el estrangulamiento (desviación de tiempo o calidad).</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Grafo del Flujo del Proceso -->
+            <div class="panel-card col-span-3">
+              <div class="panel-header">
+                <h3>Grafo del Proceso Reconstruido (Event Flow Graph)</h3>
+              </div>
+              <div class="p-4">
+                <div class="mining-canvas-wrapper" style="overflow-x: auto; padding: 20px 0;">
+                  <div class="mining-canvas" id="mining-flow-graph" style="display: block; min-width: 900px; height: 280px; position: relative;">
+                    <!-- Los nodos del grafo se renderizan dinámicamente aquí -->
+                    <div class="text-center text-muted p-8 w-full">No hay eventos cargados para este proceso. Presiona "Simular Inyección de 100 Casos" para generar y minar el historial de logs de calidad.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tabla de logs de eventos de minería -->
+            <div class="panel-card col-span-3">
+              <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                <h3 style="margin:0;">Historial de Logs de Eventos de Calidad (Event Logs)</h3>
+                <div class="panel-actions" style="margin:0;">
+                  <select id="mining-log-filter" class="input-select" style="padding: 4px 8px; font-size: 0.75rem; width: 220px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary);">
+                    <option value="all">Ver Todos los Eventos</option>
+                    <option value="deviated">Ver Solo Casos con CAPA (Desviados)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="table-container max-h-60" style="overflow-y: auto;">
+                <table class="data-table text-xs">
+                  <thead>
+                    <tr>
+                      <th>Caso ID</th>
+                      <th>Fecha y Hora (Timestamp)</th>
+                      <th>Actividad / Evento</th>
+                      <th>Recurso / Operador</th>
+                      <th>Duración Transición</th>
+                      <th>Estado Conforme</th>
+                    </tr>
+                  </thead>
+                  <tbody id="mining-logs-table-body">
+                    <tr>
+                      <td colspan="6" class="text-center text-muted p-4">No hay datos en el log de eventos de minería.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </section>
+        
+        <!-- VISTA 10: MANUAL Y GUÍAS -->
+        <section id="help-center" class="tab-content">
+          <!-- Area Selector para sub-tabs de ayuda -->
+          <div class="area-tab-selector m-b-4">
+            <button class="area-tab-btn active" data-help-tab="user-manual">Manual de Usuario</button>
+            <button class="area-tab-btn" data-help-tab="simulation-guide">Guía de Simulación Interactiva</button>
+            <button class="area-tab-btn" data-help-tab="area-manuals">Manuales por Área de Gestión</button>
+          </div>
+
+          <!-- CONTENIDO: MANUAL DE USUARIO -->
+          <div id="help-user-manual-content" class="help-tab-content">
+            <div class="dashboard-grid">
+              
+              <!-- Tarjeta: Intro e ISO 9001 -->
+              <div class="panel-card col-span-2">
+                <div class="panel-header">
+                  <h3>Alineación con ISO 9001:2015</h3>
+                </div>
+                <div class="p-4">
+                  <p class="text-sm m-b-3">
+                    <strong>SIDE-QMS</strong> es un Sistema de Gestión de Calidad Inteligente que integra y digitaliza las mejores prácticas de la norma ISO 9001:2015, garantizando la trazabilidad documental y la remediación activa de desviaciones en la organización.
+                  </p>
+                  <ul class="text-sm list-styled flex-col gap-2" style="list-style-type: disc; padding-left: 20px;">
+                    <li><strong>Numeral 4.4 (Enfoque a Procesos):</strong> Clasificación y relación de Macroprocesos, Procedimientos (POE) e Instructivos (IT).</li>
+                    <li><strong>Numeral 6.1 (Acciones para abordar riesgos):</strong> Matriz interactiva de riesgos 5x5 ligada al estado operativo de los procesos.</li>
+                    <li><strong>Numeral 7.5 (Información Documentada):</strong> Versionamiento controlado inmutable y control de estatus de aprobación.</li>
+                    <li><strong>Numeral 9.2 (Auditoría Interna):</strong> Módulo con checklists automatizados para evaluación de conformidad.</li>
+                    <li><strong>Numeral 10.2 (No Conformidades y CAPA):</strong> Activación de planes correctivos automáticos al detectar fallas.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Tarjeta: Jerarquía Documental -->
+              <div class="panel-card">
+                <div class="panel-header">
+                  <h3>Jerarquía de 5 Niveles</h3>
+                </div>
+                <div class="p-4 text-xs">
+                  <div class="m-b-3">
+                    <strong style="color:var(--primary-color)">Nivel 1: Macroprocesos</strong><br>
+                    <span>Gobierno y organización de las áreas (Administración, Comercialización, Logística).</span>
+                  </div>
+                  <div class="m-b-3">
+                    <strong style="color:#10b981">Nivel 2: Procedimientos Operativos (POE)</strong><br>
+                    <span>Flujo que define el alcance, políticas de calidad y KPIs del proceso.</span>
+                  </div>
+                  <div class="m-b-3">
+                    <strong style="color:#f59e0b">Nivel 3: Instructivos de Trabajo (IT)</strong><br>
+                    <span>Detalle paso a paso en el puesto de trabajo con checklists interactivos.</span>
+                  </div>
+                  <div class="m-b-3">
+                    <strong style="color:#ef4444">Nivel 4: Registros Oficiales</strong><br>
+                    <span>Formularios de control y recopilación de evidencias operativas.</span>
+                  </div>
+                  <div>
+                    <strong style="color:#a855f7">Nivel 5: Evidencias Digitales</strong><br>
+                    <span>Firma digital en Canvas, geolocalización GPS y archivos adjuntos.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tarjeta: Minería de Procesos -->
+              <div class="panel-card col-span-3">
+                <div class="panel-header">
+                  <h3>Módulo de Minería de Procesos</h3>
+                </div>
+                <div class="p-4 text-xs">
+                  <p class="m-b-2">
+                    Este módulo recopila los metadatos y timestamps de cada acción realizada en el SGC para reconstruir el grafo real del proceso. Se utiliza para auditar la conformidad de las ejecuciones y detectar ineficiencias:
+                  </p>
+                  <ul class="list-styled flex-col gap-1" style="padding-left: 20px; list-style-type: disc;">
+                    <li><strong>Conformance Checking:</strong> Valida que las ejecuciones sigan el orden normativo: <em>Inicio → Registro → Firma → GPS → Auditoría → Caso Cerrado</em>. Si se omiten pasos o hay desvíos (ej. sin firmar), se reduce la tasa de conformidad.</li>
+                    <li><strong>Análisis de Tiempos de Ciclo:</strong> Mide el tiempo promedio total de ejecución de un caso.</li>
+                    <li><strong>Detección de Cuellos de Botella:</strong> Identifica automáticamente la transición de actividades más lenta en horas y la resalta en el grafo en color rojo pulsante con alertas de estrangulamiento.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Tarjeta: Matriz de Seguridad -->
+              <div class="panel-card col-span-3">
+                <div class="panel-header">
+                  <h3>Matriz de Permisos por Rol</h3>
+                </div>
+                <div class="table-container">
+                  <table class="data-table text-xs">
+                    <thead>
+                      <tr>
+                        <th>Rol</th>
+                        <th>Dashboard Director</th>
+                        <th>Gestión Gerente</th>
+                        <th>Explorador</th>
+                        <th>Auditorías</th>
+                        <th>Acciones CAPA</th>
+                        <th>Reportes IA</th>
+                        <th>Minería de Procesos</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><strong>Director General</strong></td>
+                        <td>🟢 Lectura Total</td>
+                        <td>🟢 Lectura Total</td>
+                        <td>🟢 Lectura</td>
+                        <td>🟢 Lectura</td>
+                        <td>🟢 Lectura</td>
+                        <td>🔥 Generar Reporte</td>
+                        <td>🟢 Lectura Total</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Gerente de Área</strong></td>
+                        <td>❌ Restringido</td>
+                        <td>✍️ Control Total</td>
+                        <td>🟢 Lectura</td>
+                        <td>✍️ Ejecutar</td>
+                        <td>✍️ Control CAPA</td>
+                        <td>🔥 Generar Reporte</td>
+                        <td>✍️ Control Total</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Supervisor SGC</strong></td>
+                        <td>❌ Restringido</td>
+                        <td>✍️ Editar Estado</td>
+                        <td>🟢 Lectura</td>
+                        <td>✍️ Ejecutar</td>
+                        <td>✍️ Control CAPA</td>
+                        <td>❌ Restringido</td>
+                        <td>✍️ Control</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Auditor</strong></td>
+                        <td>❌ Restringido</td>
+                        <td>🟢 Lectura</td>
+                        <td>🟢 Lectura</td>
+                        <td>✍️ Ejecutar</td>
+                        <td>✍️ Control CAPA</td>
+                        <td>🔥 Generar Reporte</td>
+                        <td>🟢 Lectura</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Colaborador / Operador</strong></td>
+                        <td>❌ Restringido</td>
+                        <td>❌ Restringido</td>
+                        <td>✍️ Llenar Registros</td>
+                        <td>❌ Restringido</td>
+                        <td>❌ Restringido</td>
+                        <td>❌ Restringido</td>
+                        <td>❌ Restringido</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- CONTENIDO: GUÍA DE SIMULACIÓN -->
+          <div id="help-simulation-guide-content" class="help-tab-content" style="display:none;">
+            <div class="dashboard-grid">
+              
+              <!-- Escenario 1 -->
+              <div class="panel-card">
+                <div class="panel-header">
+                  <span class="badge badge-info">Escenario 1</span>
+                  <h3>Firma Digital y GPS (Nivel 5)</h3>
+                </div>
+                <div class="p-4">
+                  <p class="text-xs text-muted m-b-3">Simula el registro operativo de un conteo de bóveda central, capturando coordenadas geográficas y firma manuscrita en tiempo real.</p>
+                  <ol class="text-xs list-styled m-b-4" style="padding-left: 15px; list-style-type: decimal;">
+                    <li>El sistema te redireccionará al <strong>Explorador Documental</strong>.</li>
+                    <li>Buscará automáticamente el registro <strong>REG-ADM-001</strong>.</li>
+                    <li>Abrirá el formulario modal para capturar tus datos y firma.</li>
+                  </ol>
+                  <button class="btn btn-primary btn-sm w-full" id="btn-sim-scenario-1">Iniciar Simulación 1</button>
+                </div>
+              </div>
+
+              <!-- Escenario 2 -->
+              <div class="panel-card">
+                <div class="panel-header">
+                  <span class="badge badge-danger">Escenario 2</span>
+                  <h3>Auditoría Fallida e Incidente CAPA</h3>
+                </div>
+                <div class="p-4">
+                  <p class="text-xs text-muted m-b-3">Simula un fallo de auditoría (menor al 80% de conformidad) para comprobar cómo el motor del SGC abre automáticamente una No Conformidad.</p>
+                  <ol class="text-xs list-styled m-b-4" style="padding-left: 15px; list-style-type: decimal;">
+                    <li>El sistema te dirigirá a la pestaña de <strong>Auditorías</strong>.</li>
+                    <li>Cargará el modal pre-llenado de auditoría para <strong>POE-LOG-11</strong>.</li>
+                    <li>Se evaluará una conformidad negativa que disparará la Acción CAPA.</li>
+                  </ol>
+                  <button class="btn btn-primary btn-sm w-full" id="btn-sim-scenario-2">Iniciar Simulación 2</button>
+                </div>
+              </div>
+
+              <!-- Escenario 3 -->
+              <div class="panel-card">
+                <div class="panel-header">
+                  <span class="badge badge-warning">Escenario 3</span>
+                  <h3>Alertas de Vencimiento Documental</h3>
+                </div>
+                <div class="p-4">
+                  <p class="text-xs text-muted m-b-3">Prueba las alertas automáticas que notifican el vencimiento de procesos a través de correos, notificaciones Push y dispositivo móvil simulado.</p>
+                  <ol class="text-xs list-styled m-b-4" style="padding-left: 15px; list-style-type: decimal;">
+                    <li>Redireccionará a la pestaña de <strong>Alertas y Vencimientos</strong>.</li>
+                    <li>Ejecutará el motor de validación diaria de vigencia documental.</li>
+                    <li>Actualizará la pantalla del teléfono móvil con alertas visuales.</li>
+                  </ol>
+                  <button class="btn btn-primary btn-sm w-full" id="btn-sim-scenario-3">Iniciar Simulación 3</button>
+                </div>
+              </div>
+
+              <!-- Escenario 4 -->
+              <div class="panel-card">
+                <div class="panel-header">
+                  <span class="badge badge-success">Escenario 4</span>
+                  <h3>Auditoría de IA y Reportes Excel</h3>
+                </div>
+                <div class="p-4">
+                  <p class="text-xs text-muted m-b-3">Ejecuta el asistente de Inteligencia Artificial para diagnosticar fallas de control del SGC y descargar los datos a una hoja de cálculo.</p>
+                  <ol class="text-xs list-styled m-b-4" style="padding-left: 15px; list-style-type: decimal;">
+                    <li>Te guiará a la consola del <strong>Centro de IA</strong>.</li>
+                    <li>Generará un análisis ejecutivo semanal con desviaciones críticas.</li>
+                    <li>Habilitará la exportación inmediata del informe a formato CSV (Excel).</li>
+                  </ol>
+                  <button class="btn btn-primary btn-sm w-full" id="btn-sim-scenario-4">Iniciar Simulación 4</button>
+                </div>
+              </div>
+
+              <!-- Escenario 5 -->
+              <div class="panel-card">
+                <div class="panel-header">
+                  <span class="badge bg-purple text-white">Escenario 5</span>
+                  <h3>Minería de Procesos (Process Mining)</h3>
+                </div>
+                <div class="p-4">
+                  <p class="text-xs text-muted m-b-3">Inyecta un flujo de 100 eventos históricos para reconstruir de forma automática el grafo de procesos e identificar retrasos (cuellos de botella).</p>
+                  <ol class="text-xs list-styled m-b-4" style="padding-left: 15px; list-style-type: decimal;">
+                    <li>El sistema te llevará a la pestaña **Minería de Procesos**.</li>
+                    <li>Generará de inmediato 100 eventos del proceso en la base de datos local.</li>
+                    <li>Construirá el grafo, marcará las transiciones lentas en rojo y listará los logs.</li>
+                  </ol>
+                  <button class="btn btn-primary btn-sm w-full" id="btn-sim-scenario-5">Iniciar Simulación 5</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- CONTENIDO: MANUALES POR ÁREA DE GESTIÓN -->
+          <div id="help-area-manuals-content" class="help-tab-content" style="display:none;">
+            <!-- Sub-selector de Ayuda por Área -->
+            <div class="area-tab-selector m-b-4" style="background: rgba(255,255,255,0.01); padding: 8px; border-radius: 8px; border: 1px solid var(--border-color);">
+              <button class="area-tab-btn active" data-sub-help-tab="adm-manual">Administración y Finanzas (ADM)</button>
+              <button class="area-tab-btn" data-sub-help-tab="com-manual">Comercialización (COM)</button>
+              <button class="area-tab-btn" data-sub-help-tab="log-manual">Logística y Compras (LOG)</button>
+            </div>
+
+            <!-- SUB-CONTENIDO: MANUAL ADM -->
+            <div id="sub-help-adm-manual-content" class="sub-help-tab-content">
+              <div class="dashboard-grid">
+                <!-- Tarjeta Principal: Objetivos y Alineación -->
+                <div class="panel-card col-span-2">
+                  <div class="panel-header">
+                    <h3>Manual del Área de Administración y Finanzas (ADM)</h3>
+                  </div>
+                  <div class="p-4 text-sm">
+                    <p class="m-b-3">
+                      Esta gerencia tiene como objetivo fundamental asegurar la estabilidad de caja, el control riguroso de remesas de valores, la inmutabilidad de los estados contables en el ERP y el cumplimiento de competencias del capital humano.
+                    </p>
+                    <div class="m-b-3">
+                      <strong>Alineación Normativa ISO 9001:2015:</strong>
+                      <ul class="list-styled flex-col gap-1 m-t-1" style="padding-left: 20px; list-style-type: disc;">
+                        <li><strong>Numeral 4.4 (Enfoque a Procesos)</strong>: Control financiero integrado en la operación de boveda.</li>
+                        <li><strong>Numeral 7.1.1 (Infraestructura de Datos)</strong>: Respaldos e inmutabilidad de la información en el ERP.</li>
+                        <li><strong>Numeral 7.2 (Competencia)</strong>: Control y expediente maestro de contrataciones de RRHH.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tarjeta: Macroprocesos y POEs -->
+                <div class="panel-card">
+                  <div class="panel-header">
+                    <h3>Macroprocesos y POEs (ADM)</h3>
+                  </div>
+                  <div class="p-4 text-xs">
+                    <div class="m-b-2">
+                      <strong>MACRO-ADM-01: Gobierno Corporativo y Tesorería</strong>
+                      <ul style="padding-left: 15px; margin-top: 4px;">
+                        <li>• <em>POE-ADM-01</em>: Regula arqueos, cierres de bóveda y entrega segura de remesas a la ETV.</li>
+                        <li>• <em>POE-ADM-02</em>: Regula el cierre y conciliación diaria en el ERP.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <strong>MACRO-ADM-02: Gestión de Capital Humano y Legal</strong>
+                      <ul style="padding-left: 15px; margin-top: 4px;">
+                        <li>• <em>POE-ADM-03</em>: Expediente maestro y evaluación de competencias.</li>
+                        <li>• <em>POE-ADM-04</em>: Control y registro de activos fijos de la empresa.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tarjeta: Operación Paso a Paso ADM -->
+                <div class="panel-card col-span-3">
+                  <div class="panel-header">
+                    <h3>Guía Paso a Paso de Tareas y Operaciones (ADM)</h3>
+                  </div>
+                  <div class="p-4 text-xs">
+                    <div class="dashboard-grid">
+                      <div>
+                        <h4 class="m-b-2 text-primary" style="font-size: 1rem;">1. Gestión de Control por Área (ADM)</h4>
+                        <p class="m-b-2">Haz clic en el filtro <strong>Administración y Finanzas (ADM)</strong> en la pestaña <em>Gestión por Área</em> para acceder a la tabla de control del departamento:</p>
+                        <ul class="list-styled flex-col gap-2 m-b-3" style="padding-left: 15px; list-style-type: decimal;">
+                          <li><strong>Versionamiento Inmutable (Numeral 7.5 ISO 9001)</strong>: Al cambiar el estado de un procedimiento (ej. <code>POE-ADM-01</code>) a <strong>Publicado</strong>, el sistema gatilla automáticamente el motor de versionamiento, incrementando el número de versión (ej. de <code>v1.2</code> a <code>v1.3</code>) y guardando el histórico.</li>
+                          <li><strong>Tasa de Rendimiento</strong>: Monitorea la tasa de conformidad particular del procedimiento según sus últimas auditorías en la columna correspondiente.</li>
+                          <li><strong>🔍 Ficha de Control</strong>: Haz clic en el icono de lupa para abrir la ficha técnica con las Entradas, Salidas clave, Matriz de Riesgos (Fraudes/Errores) y KPIs del POE.</li>
+                          <li><strong>✍️ Auditoría Activa</strong>: Presiona "Auditar" para iniciar el checklist interactivo de control de caja o tesorería. Si la calificación obtenida es menor al 100%, el sistema generará una <strong>No Conformidad CAPA</strong> automática.</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 class="m-b-2 text-primary" style="font-size: 1rem;">2. Registro de Evidencias (Nivel 4 y 5)</h4>
+                        <p class="m-b-2">Para evidenciar el cumplimiento del arqueo o cierre del día:</p>
+                        <ul class="list-styled flex-col gap-2 m-b-3" style="padding-left: 15px; list-style-type: decimal;">
+                          <li>Abre el <strong>Explorador Documental</strong>, navega en el árbol: <em>Administración y Finanzas → Gobierno Corporativo → POE-ADM-01 → IT-ADM-01 → REG-ADM-001</em>.</li>
+                          <li>Selecciona la ficha y haz clic en el botón azul <strong>Llenar Registro</strong> para abrir el formulario digital.</li>
+                          <li>Haz clic en <strong>Autocompletar GPS</strong> para geolocalizar la sucursal de forma inmutable, dibuja tu firma digital en el Canvas del sistema y completa los datos de arqueo contable.</li>
+                          <li>Presiona <strong>Registrar y Validar Evidencia</strong> para guardar los datos en la bitácora de trazabilidad.</li>
+                        </ul>
+                        <h4 class="m-b-1 text-primary" style="font-size: 1rem;">3. Monitoreo de Alertas de la Gerencia</h4>
+                        <p class="text-muted text-justify">El panel de alertas a la derecha filtra eventos exclusivos de ADM. Bordes de color rojo indican <strong>CAPA Críticas</strong> urgentes (retrasos contables), mientras que los amarillos indican avisos preventivos (vencimientos de contratos o licencias en menos de 15 días).</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SUB-CONTENIDO: MANUAL COM -->
+            <div id="sub-help-com-manual-content" class="sub-help-tab-content" style="display:none;">
+              <div class="dashboard-grid">
+                <!-- Tarjeta Principal: Objetivos y Alineación -->
+                <div class="panel-card col-span-2">
+                  <div class="panel-header">
+                    <h3>Manual del Área de Comercialización (COM)</h3>
+                  </div>
+                  <div class="p-4 text-sm">
+                    <p class="m-b-3">
+                      Esta gerencia vela por la calidad del servicio al cliente final, el cumplimiento tributario en la facturación electrónica en los terminales POS (cajas), la inocuidad en panadería y cocina, y la paridad absoluta de precios.
+                    </p>
+                    <div class="m-b-3">
+                      <strong>Alineación Normativa ISO 9001:2015:</strong>
+                      <ul class="list-styled flex-col gap-1 m-t-1" style="padding-left: 20px; list-style-type: disc;">
+                        <li><strong>Numeral 8.2 (Requisitos para Productos y Servicios)</strong>: Garantizar que el precio cobrado en caja coincide con el exhibido.</li>
+                        <li><strong>Numeral 8.5.1 (Control de la Producción)</strong>: Control estricto de las BPM (Buenas Prácticas de Manufactura) y de la cadena de frío en perecederos.</li>
+                        <li><strong>Numeral 9.1.2 (Satisfacción del Cliente)</strong>: Evaluación constante del Net Promoter Score (NPS) del Front-End.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tarjeta: Macroprocesos y POEs -->
+                <div class="panel-card">
+                  <div class="panel-header">
+                    <h3>Macroprocesos y POEs (COM)</h3>
+                  </div>
+                  <div class="p-4 text-xs">
+                    <div class="m-b-2">
+                      <strong>MACRO-COM-01: Atención al Cliente y Cajas</strong>
+                      <ul style="padding-left: 15px; margin-top: 4px;">
+                        <li>• <em>POE-FE-01</em>: Protocolo de facturación electrónica y transmisión fiscal de DTE.</li>
+                        <li>• <em>POE-FE-02</em>: Respaldo y custodia de certificados digitales.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <strong>MACRO-COM-02: Perecederos y Cadena de Frío</strong>
+                      <ul style="padding-left: 15px; margin-top: 4px;">
+                        <li>• <em>POE-PER-01</em>: Preservación de la cadena de frío y muestreo de temperaturas.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tarjeta: Operación Paso a Paso COM -->
+                <div class="panel-card col-span-3">
+                  <div class="panel-header">
+                    <h3>Guía Paso a Paso de Tareas y Operaciones (COM)</h3>
+                  </div>
+                  <div class="p-4 text-xs">
+                    <div class="dashboard-grid">
+                      <div>
+                        <h4 class="m-b-2 text-primary" style="font-size: 1rem;">1. Gestión de Control por Área (COM)</h4>
+                        <p class="m-b-2">Haz clic en el filtro <strong>Comercialización (COM)</strong> en la pestaña <em>Gestión por Área</em> para acceder a la tabla de control comercial:</p>
+                        <ul class="list-styled flex-col gap-2 m-b-3" style="padding-left: 15px; list-style-type: decimal;">
+                          <li><strong>Versionamiento Inmutable (Numeral 7.5 ISO 9001)</strong>: Al cambiar el estado de un protocolo de cobro o BPM (ej. <code>POE-FE-01</code>) a <strong>Publicado</strong>, el sistema incrementa la versión (ej. de <code>v1.0</code> a <code>v1.1</code>) y registra el histórico de cambios de manera inmutable.</li>
+                          <li><strong>Tasa de Rendimiento</strong>: Muestra la tasa de conformidad de las últimas auditorías de cajas o muestreo de cadena de frío en sala de ventas.</li>
+                          <li><strong>🔍 Ficha de Control</strong>: Haz clic en el icono de lupa para abrir la ficha con Entradas (transmisión POS), Salidas (XML DTE), matriz de riesgos (mermas/caída fiscal) y KPIs comerciales.</li>
+                          <li><strong>✍️ Auditoría Activa</strong>: Presiona "Auditar" para evaluar la paridad de precios fleje-caja o la cadena de frío. Si la conformidad obtenida es menor al 100%, el sistema genera de forma automática una <strong>No Conformidad CAPA</strong>.</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 class="m-b-2 text-primary" style="font-size: 1rem;">2. Registro de Evidencias (Nivel 4 y 5)</h4>
+                        <p class="m-b-2">Para evidenciar el cumplimiento del muestreo de frío o paridad de precios:</p>
+                        <ul class="list-styled flex-col gap-2 m-b-3" style="padding-left: 15px; list-style-type: decimal;">
+                          <li>Abre el <strong>Explorador Documental</strong>, navega en el árbol: <em>Comercialización → Cajas/Perecederos → POE-FE-01 → IT-FE-01 → REG-FE-001</em>.</li>
+                          <li>Selecciona la ficha y haz clic en el botón azul <strong>Llenar Registro</strong> para abrir el formulario digital de cajas.</li>
+                          <li>Haz clic en <strong>Autocompletar GPS</strong> para geolocalizar la sucursal de forma inmutable, dibuja la firma digital del cajero supervisor en el Canvas y completa la auditoría de caja.</li>
+                          <li>Presiona <strong>Registrar y Validar Evidencia</strong> para guardar los datos en la bitácora de trazabilidad.</li>
+                        </ul>
+                        <h4 class="m-b-1 text-primary" style="font-size: 1rem;">3. Monitoreo de Alertas de la Gerencia</h4>
+                        <p class="text-muted text-justify">El panel de alertas a la derecha filtra eventos exclusivos de COM. Bordes de color rojo indican <strong>CAPA Críticas</strong> urgentes (temperatura fuera de rango en perecederos), mientras que los amarillos indican avisos preventivos (desfases en la transmisión XML de cajas en menos de 15 días).</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SUB-CONTENIDO: MANUAL LOG -->
+            <div id="sub-help-log-manual-content" class="sub-help-tab-content" style="display:none;">
+              <div class="dashboard-grid">
+                <!-- Tarjeta Principal: Objetivos y Alineación -->
+                <div class="panel-card col-span-2">
+                  <div class="panel-header">
+                    <h3>Manual del Área de Logística y Compras (LOG)</h3>
+                  </div>
+                  <div class="p-4 text-sm">
+                    <p class="m-b-3">
+                      Esta gerencia administra el catálogo de productos autorizados, el aprovisionamiento oportuno en góndolas, el control de caducidades bajo políticas FEFO (First Expired, First Out) y el Vendor Rating de proveedores.
+                    </p>
+                    <div class="m-b-3">
+                      <strong>Alineación Normativa ISO 9001:2015:</strong>
+                      <ul class="list-styled flex-col gap-1 m-t-1" style="padding-left: 20px; list-style-type: disc;">
+                        <li><strong>Numeral 8.4 (Control de Procesos de Proveedores)</strong>: Evaluación sistemática del cumplimiento de entrega de proveedores (OTIF).</li>
+                        <li><strong>Numeral 8.5.2 (Identificación y Trazabilidad)</strong>: Registro por lotes y fecha de caducidad en el almacén central.</li>
+                        <li><strong>Numeral 8.5.4 (Preservación de Producto)</strong>: Rotación eficiente de stock en bodega para evitar productos caducados en piso.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tarjeta: Macroprocesos y POEs -->
+                <div class="panel-card">
+                  <div class="panel-header">
+                    <h3>Macroprocesos y POEs (LOG)</h3>
+                  </div>
+                  <div class="p-4 text-xs">
+                    <div class="m-b-2">
+                      <strong>MACRO-LOG-01: Planificación y Catálogo</strong>
+                      <ul style="padding-left: 15px; margin-top: 4px;">
+                        <li>• <em>POE-LOG-01</em>: Reglas de selección de marcas y líneas de compra.</li>
+                        <li>• <em>POE-LOG-03</em>: Alta y parametrización de SKUs en el catálogo.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <strong>MACRO-LOG-02: Abastecimiento y Almacén</strong>
+                      <ul style="padding-left: 15px; margin-top: 4px;">
+                        <li>• <em>POE-LOG-02</em>: Disponibilidad de catálogo físico y digital.</li>
+                        <li>• <em>POE-LOG-11</em>: Recepción, almacenamiento y despacho bajo FEFO.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tarjeta: Operación Paso a Paso LOG -->
+                <div class="panel-card col-span-3">
+                  <div class="panel-header">
+                    <h3>Guía Paso a Paso de Tareas y Operaciones (LOG)</h3>
+                  </div>
+                  <div class="p-4 text-xs">
+                    <div class="dashboard-grid">
+                      <div>
+                        <h4 class="m-b-2 text-primary" style="font-size: 1rem;">1. Gestión de Control por Área (LOG)</h4>
+                        <p class="m-b-2">Haz clic en el filtro <strong>Logística y Compras (LOG)</strong> en la pestaña <em>Gestión por Área</em> para acceder a la tabla de control logístico:</p>
+                        <ul class="list-styled flex-col gap-2 m-b-3" style="padding-left: 15px; list-style-type: decimal;">
+                          <li><strong>Versionamiento Inmutable (Numeral 7.5 ISO 9001)</strong>: Al cambiar el estado de un procedimiento de almacén (ej. <code>POE-LOG-11</code>) a <strong>Publicado</strong>, el sistema incrementa la versión (ej. de <code>v1.0</code> a <code>v1.1</code>) y registra el histórico de cambios de manera inmutable.</li>
+                          <li><strong>Tasa de Rendimiento</strong>: Muestra la tasa de conformidad de las últimas auditorías de picking FEFO o Vendor Rating de proveedores.</li>
+                          <li><strong>🔍 Ficha de Control</strong>: Haz clic en el icono de lupa para abrir la ficha con Entradas (órdenes de compra), Salidas (LPN de WMS), matriz de riesgos (quiebre de stock) y KPIs logísticos (OTIF).</li>
+                          <li><strong>✍️ Auditoría Activa</strong>: Presiona "Auditar" para evaluar el picking o rampa. Si la conformidad obtenida es menor al 100%, el sistema genera de forma automática una <strong>No Conformidad CAPA</strong>.</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 class="m-b-2 text-primary" style="font-size: 1rem;">2. Registro de Evidencias (Nivel 4 y 5)</h4>
+                        <p class="m-b-2">Para evidenciar el cumplimiento del conteo cíclico o recepción en muelle:</p>
+                        <ul class="list-styled flex-col gap-2 m-b-3" style="padding-left: 15px; list-style-type: decimal;">
+                          <li>Abre el <strong>Explorador Documental</strong>, navega en el árbol: <em>Logística → Recepción/WMS → POE-LOG-11 → IT-LOG-01 → REG-LOG-011</em>.</li>
+                          <li>Selecciona la ficha y haz clic en el botón azul <strong>Llenar Registro</strong> para abrir el formulario digital de rampa.</li>
+                          <li>Haz clic en <strong>Autocompletar GPS</strong> para geolocalizar la sucursal de forma inmutable, dibuja la firma digital en el Canvas y completa el registro logístico.</li>
+                          <li>Presiona <strong>Registrar y Validar Evidencia</strong> para guardar los datos en la bitácora de trazabilidad.</li>
+                        </ul>
+                        <h4 class="m-b-1 text-primary" style="font-size: 1rem;">3. Monitoreo de Alertas de la Gerencia</h4>
+                        <p class="text-muted text-justify">El panel de alertas a la derecha filtra eventos exclusivos de LOG. Bordes de color rojo indican <strong>CAPA Críticas</strong> urgentes (OTIF de proveedores menor al 92%), mientras que los amarillos indican avisos preventivos (conteos cíclicos de inventario programados en menos de 15 días).</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- TAB: MATRIZ SGC 360° -->
+        <section id="sgc-matrix" class="tab-content">
+          <div class="dashboard-grid">
+            <div class="panel-card col-span-3">
+              <div class="panel-header flex-row justify-between align-center" style="display:flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px;">
+                <div>
+                  <h3 style="font-size: 1.25rem;">Matriz de Procesos del SGC 360° (ISO 9001:2015)</h3>
+                  <p class="text-xs text-muted m-t-1">Visualización completa e interactiva de todos los niveles del Sistema de Gestión de Calidad (Procesos, POEs, ITs y Registros asociados).</p>
+                </div>
+                <div class="flex-row gap-2" style="display:flex; gap:8px;">
+                  <button class="btn btn-primary" id="btn-export-matrix-csv" style="display:flex; align-items:center; gap:6px; cursor: pointer;">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    <span>Exportar Matriz a Excel (CSV)</span>
+                  </button>
+                </div>
+              </div>
+              
+              <!-- Controles de Búsqueda y Filtro -->
+              <div class="p-4 flex-row gap-4 align-center border-b" style="display:flex; gap:16px; align-items:center; background: rgba(255,255,255,0.01); border-bottom: 1px solid rgba(255,255,255,0.05); flex-wrap: wrap;">
+                <div class="form-group" style="flex: 2; min-width: 250px;">
+                  <label for="matrix-search-input" style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Buscar Palabra Clave:</label>
+                  <input type="text" id="matrix-search-input" class="input-text m-t-1" placeholder="Ej. Arqueo, BPM, FEFO, Facturación..." style="padding: 8px 12px; font-size: 0.8rem;">
+                </div>
+                <div class="form-group" style="flex: 1; min-width: 150px;">
+                  <label for="matrix-area-filter" style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Filtrar por Área:</label>
+                  <select id="matrix-area-filter" class="input-select m-t-1" style="padding: 8px 12px; font-size: 0.8rem;">
+                    <option value="ALL">Todas las Áreas</option>
+                    <option value="ADM">Administración y Finanzas (ADM)</option>
+                    <option value="COM">Comercialización (COM)</option>
+                    <option value="LOG">Logística y Compras (LOG)</option>
+                  </select>
+                </div>
+                <div class="form-group" style="flex: 1.5; min-width: 220px;">
+                  <label for="matrix-view-toggle" style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Tipo de Matriz:</label>
+                  <select id="matrix-view-toggle" class="input-select m-t-1" style="padding: 8px 12px; font-size: 0.8rem; border: 1px solid var(--primary);">
+                    <option value="sgc">1. Matriz de Control SGC (Niveles 1-5)</option>
+                    <option value="sipoc">2. Matriz SIPOC Maestra (ISO 9001 Numeral 4.4)</option>
+                  </select>
+                </div>
+              </div>
+              
+              <!-- Tabla de la Matriz Tree Grid -->
+              <div class="p-4 w-full" style="overflow-x: auto;">
+                <table class="data-table text-xs w-full" id="sgc-matrix-table" style="min-width: 1000px; border-collapse: collapse;">
+                  <thead>
+                    <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);">
+                      <th style="padding: 10px 14px; text-align: left; width: 5%;">Área</th>
+                      <th style="padding: 10px 14px; text-align: left; width: 10%;">Macroproceso</th>
+                      <th style="padding: 10px 14px; text-align: left; width: 6%;">Cód. POE</th>
+                      <th style="padding: 10px 14px; text-align: left; width: 14%;">Procedimiento (POE)</th>
+                      <th style="padding: 10px 14px; text-align: left; width: 6%;">Cód. IT</th>
+                      <th style="padding: 10px 14px; text-align: left; width: 14%;">Instructivo (IT)</th>
+                      <th style="padding: 10px 14px; text-align: left; width: 15%;">Actividades / Checklist (Nivel 4)</th>
+                      <th style="padding: 10px 14px; text-align: left; width: 18%;">Ejemplos de Aplicación (IT)</th>
+                      <th style="padding: 10px 14px; text-align: left; width: 12%;">Registro Evidencia (Nivel 5)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sgc-matrix-table-body">
+                    <!-- Filas renderizadas dinámicamente -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+      </div>
+    </main>
+  </div>
+  
+  <!-- MODALES DE CONTROL -->
+  
+  <!-- MODAL: REGISTRAR EVIDENCIA (NIVEL 4 & 5) -->
+  <div class="modal-backdrop" id="modal-fill-record">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="record-modal-title">Llenado de Registro Oficial</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="record-form">
+          <input type="hidden" id="form-record-code">
+          <input type="hidden" id="form-record-poe">
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Código Registro:</label>
+              <input type="text" id="form-record-code-display" disabled class="input-disabled">
+            </div>
+            <div class="form-group">
+              <label>Nombre:</label>
+              <input type="text" id="form-record-name" disabled class="input-disabled">
+            </div>
+            <div class="form-group">
+              <label>Responsable / Firma de Calidad:</label>
+              <input type="text" id="form-record-owner" required class="input-text">
+            </div>
+            <div class="form-group">
+              <label>Sucursal / Nodo:</label>
+              <select id="form-record-branch" required class="input-select">
+                <option value="Sucursal Retorno">Sucursal Retorno</option>
+                <option value="Sucursal Centro">Sucursal Centro</option>
+                <option value="Sucursal Suchitoto">Sucursal Suchitoto</option>
+                <option value="Centro de Distribución">Centro de Distribución</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Ubicación GPS (Coordenadas):</label>
+              <div class="input-addon-group">
+                <input type="text" id="form-record-gps" required placeholder="Lat, Lon" class="input-text">
+                <button type="button" class="btn btn-secondary" id="btn-get-gps">Autocompletar</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Evidencia Digital (Nivel 5):</label>
+              <input type="file" id="form-record-file" class="input-file">
+              <span class="text-xs text-muted">Acepta PDF, Fotografías, Excel, Audio, Videos</span>
+            </div>
+          </div>
+          
+          <div class="form-group m-t-3">
+            <label>Comentarios de Ejecución / Hallazgos Operativos:</label>
+            <textarea id="form-record-comments" rows="3" class="input-textarea" placeholder="Indicar observaciones..."></textarea>
+          </div>
+          
+          <!-- Canvas de Firma Digital -->
+          <div class="form-group m-t-3">
+            <label>Firma Digital Autorizada (Dibujar en el recuadro):</label>
+            <div class="signature-canvas-wrapper">
+              <canvas id="signature-canvas" width="450" height="150"></canvas>
+              <button type="button" class="btn btn-danger btn-xs" id="btn-clear-signature">Borrar Firma</button>
+            </div>
+          </div>
+          
+          <div class="modal-footer m-t-4">
+            <button type="button" class="btn btn-secondary close-modal-btn">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Registrar y Validar Evidencia</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MODAL: DETALLES DE DOCUMENTO -->
+  <div class="modal-backdrop" id="modal-doc-details">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="doc-details-title">Detalles de Documento</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body" id="doc-details-content">
+        <!-- Poblado dinámicamente -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- MODAL: EJECUTAR AUDITORÍA -->
+  <div class="modal-backdrop" id="modal-audit-form">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <h3>Ejecución de Auditoría Interna de Calidad</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="audit-execution-form">
+          <input type="hidden" id="audit-poe-code">
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Procedimiento a Auditar:</label>
+              <input type="text" id="audit-poe-name" disabled class="input-disabled">
+            </div>
+            <div class="form-group">
+              <label>Auditor Responsable:</label>
+              <input type="text" id="audit-auditor-name" required class="input-text">
+            </div>
+          </div>
+          
+          <div class="audit-questions-section m-t-4">
+            <h4>Checklist y Preguntas de Control ISO 9001:2015</h4>
+            <div class="questions-list" id="audit-questions-list">
+              <!-- Se poblará según las checklists de los IT asociados -->
+            </div>
+          </div>
+          
+          <div class="form-group m-t-3">
+            <label>Observaciones y Hallazgos:</label>
+            <textarea id="audit-observations" rows="3" required class="input-textarea" placeholder="Describir las observaciones de la auditoría..."></textarea>
+          </div>
+          
+          <div class="modal-footer m-t-4">
+            <button type="button" class="btn btn-secondary close-modal-btn">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Finalizar y Evaluar Auditoría</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MODAL: NUEVA ACCION CAPA -->
+  <div class="modal-backdrop" id="modal-capa-form">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Crear Acción CAPA Manual</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="capa-execution-form">
+          <div class="form-group">
+            <label>Procedimiento Afectado:</label>
+            <select id="capa-form-poe" required class="input-select">
+              <!-- Cargado dinámicamente -->
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Descripción de la No Conformidad:</label>
+            <textarea id="capa-form-desc" rows="3" required class="input-textarea" placeholder="Detalle de la desviación o hallazgo..."></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label>Acción Correctiva (Eliminar causa raíz):</label>
+            <textarea id="capa-form-corrective" rows="3" required class="input-textarea" placeholder="Acciones inmediatas y plan..."></textarea>
+          </div>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Responsable:</label>
+              <input type="text" id="capa-form-owner" required class="input-text">
+            </div>
+            <div class="form-group">
+              <label>Fecha Límite:</label>
+              <input type="date" id="capa-form-deadline" required class="input-text">
+            </div>
+            <div class="form-group">
+              <label>Prioridad:</label>
+              <select id="capa-form-priority" class="input-select">
+                <option value="Alta">Alta</option>
+                <option value="Media">Media</option>
+                <option value="Bajo">Baja</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Costo Estimado ($):</label>
+              <input type="number" id="capa-form-cost" required class="input-text" placeholder="Ej. 500">
+            </div>
+          </div>
+          
+          <div class="modal-footer m-t-4">
+            <button type="button" class="btn btn-secondary close-modal-btn">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Registrar Plan CAPA</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: SELECCIONAR POE PARA AUDITORÍA -->
+  <div class="modal-backdrop" id="modal-select-poe-audit">
+    <div class="modal-card" style="max-width: 500px;">
+      <div class="modal-header">
+        <h3>Iniciar Nueva Auditoría Interna</h3>
+        <button class="close-btn" onclick="document.getElementById('modal-select-poe-audit').classList.remove('active')">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 16px;">
+        <p class="text-xs text-muted" style="margin-bottom: 16px; line-height: 1.4;">Seleccione el Procedimiento Operativo Estandarizado (POE) de la lista para cargar sus instructivos y checklist de auditoría correspondientes.</p>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label for="search-audit-poe" style="font-size: 0.75rem; font-weight:600; text-transform:uppercase;">Buscar Procedimiento (Filtro Rápido):</label>
+          <input type="text" id="search-audit-poe" placeholder="Ej: Arqueo, COM, ADM..." class="input-text m-t-1" style="width: 100%; padding: 8px 12px; font-size: 0.8rem; margin-top: 6px; outline: none; border-radius: 6px;">
+        </div>
+        <div class="form-group">
+          <label for="select-audit-poe-code" style="font-size: 0.75rem; font-weight:600; text-transform:uppercase;">Procedimiento Seleccionado:</label>
+          <select id="select-audit-poe-code" class="input-select m-t-1" style="width: 100%; padding: 8px 12px; font-size: 0.8rem; margin-top: 6px;">
+            <!-- Se llena dinámicamente con todos los POEs -->
+          </select>
+        </div>
+        <div class="modal-footer" style="display:flex; justify-content: flex-end; gap: 8px; margin-top: 24px;">
+          <button class="btn btn-secondary" onclick="document.getElementById('modal-select-poe-audit').classList.remove('active')">Cancelar</button>
+          <button class="btn btn-primary" id="btn-confirm-start-audit">Iniciar Auditoría</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Editar Riesgo y Control (Administrador) -->
+  <div class="modal-backdrop" id="modal-edit-risk">
+    <div class="modal-card" style="max-width: 500px;">
+      <div class="modal-header">
+        <h3>Editar Control y Medida Preventiva</h3>
+        <button class="close-btn" onclick="document.getElementById('modal-edit-risk').classList.remove('active')">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 16px;">
+        <p class="text-xs text-muted" style="margin-bottom: 16px; line-height: 1.4;">Modifique los parámetros del riesgo, la barrera de control preventivo o la mitigación asociada. Se guardará de forma persistente.</p>
+        
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label style="font-size: 0.75rem; font-weight:600;">Procedimiento Asociado:</label>
+          <input type="text" id="edit-risk-poe" class="input-text m-t-1" disabled style="width: 100%; opacity: 0.6; padding: 8px;">
+        </div>
+        
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label style="font-size: 0.75rem; font-weight:600;">Riesgo / Desviación Detectada:</label>
+          <textarea id="edit-risk-name" class="input-text m-t-1" disabled style="width: 100%; opacity: 0.6; height: 60px; padding: 8px; resize: none;"></textarea>
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+          <div class="form-group" style="flex: 1;">
+            <label for="edit-risk-prob" style="font-size: 0.75rem; font-weight:600;">Probabilidad (P):</label>
+            <select id="edit-risk-prob" class="input-select m-t-1" style="width: 100%; padding: 8px;">
+              <option value="1">1 - Muy Rara</option>
+              <option value="2">2 - Poco Frecuente</option>
+              <option value="3">3 - Moderada</option>
+              <option value="4">4 - Frecuente</option>
+              <option value="5">5 - Muy Frecuente</option>
+            </select>
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label for="edit-risk-imp" style="font-size: 0.75rem; font-weight:600;">Impacto (I):</label>
+            <select id="edit-risk-imp" class="input-select m-t-1" style="width: 100%; padding: 8px;">
+              <option value="1">1 - Insignificante</option>
+              <option value="2">2 - Menor</option>
+              <option value="3">3 - Moderado</option>
+              <option value="4">4 - Mayor</option>
+              <option value="5">5 - Catastrófico</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label for="edit-risk-control" style="font-size: 0.75rem; font-weight:600; color: #60a5fa;">5. Control (Barrera Preventiva Ejecutada):</label>
+          <textarea id="edit-risk-control" class="input-text m-t-1" style="width: 100%; height: 50px; padding: 8px; resize: vertical;" placeholder="Escriba la barrera preventiva..."></textarea>
+        </div>
+        
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label for="edit-risk-mitigation" style="font-size: 0.75rem; font-weight:600; color: #f59e0b;">6. Mitigación (Plan B / Contingencia):</label>
+          <textarea id="edit-risk-mitigation" class="input-text m-t-1" style="width: 100%; height: 50px; padding: 8px; resize: vertical;" placeholder="Escriba la acción de mitigación..."></textarea>
+        </div>
+        
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label for="edit-risk-status" style="font-size: 0.75rem; font-weight:600; color: #10b981;">Estatus del Riesgo:</label>
+          <select id="edit-risk-status" class="input-select m-t-1" style="width: 100%; padding: 8px; background: rgba(10, 14, 26, 0.6); border: 1px solid var(--border-color); color: #fff; border-radius: 6px;">
+            <option value="Activo">Activo (Bajo monitoreo diario)</option>
+            <option value="Mitigado">Mitigado (Control correctivo aplicado/cerrado)</option>
+          </select>
+        </div>
+        
+        <div class="modal-footer" style="display:flex; justify-content: flex-end; gap: 8px; margin-top: 20px;">
+          <button class="btn btn-secondary" onclick="document.getElementById('modal-edit-risk').classList.remove('active')">Cancelar</button>
+          <button class="btn btn-primary" id="btn-save-risk-changes">Guardar Cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Overlay de Acceso Restringido por Área -->
+  <div id="login-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(8, 12, 24, 0.96); backdrop-filter: blur(12px); z-index: 9999; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+    <div style="background: rgba(17, 24, 43, 0.9); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 20px rgba(59, 130, 246, 0.15); width: 400px; padding: 40px; text-align: center; color: #fff;">
+      <div style="font-size: 2.5rem; margin-bottom: 10px;">🛡️</div>
+      <h2 style="font-weight: 700; font-size: 1.5rem; color: #60a5fa; margin-bottom: 8px; letter-spacing: 0.5px;">Acceso al SGC SIDE-QMS</h2>
+      <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 24px;">Ingrese sus credenciales autorizadas de gerencia.</p>
+      
+      <div id="login-error-msg" style="color: #f87171; font-size: 0.8rem; margin-bottom: 20px; display: none; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.15); padding: 10px; border-radius: 8px; font-weight: 500;">
+        Usuario o contraseña incorrectos.
+      </div>
+      
+      <form id="login-form">
+        <div style="margin-bottom: 18px; text-align: left;">
+          <label style="font-size: 0.75rem; color: #94a3b8; display: block; margin-bottom: 6px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Usuario</label>
+          <input type="text" id="login-username" placeholder="Ej: com" required style="width: 100%; padding: 12px 16px; background: rgba(10, 14, 26, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; color: #fff; font-size: 0.9rem; outline: none; transition: border-color 0.2s;" />
+        </div>
+        <div style="margin-bottom: 28px; text-align: left;">
+          <label style="font-size: 0.75rem; color: #94a3b8; display: block; margin-bottom: 6px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Contraseña</label>
+          <div style="position: relative; width: 100%;">
+            <input type="password" id="login-password" placeholder="••••••••" required style="width: 100%; padding: 12px 48px 12px 16px; background: rgba(10, 14, 26, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; color: #fff; font-size: 0.9rem; outline: none; transition: border-color 0.2s;" />
+            <button type="button" id="btn-toggle-password" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #94a3b8; cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center; outline: none;">
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" id="eye-icon-open"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" id="eye-icon-closed" style="display: none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+            </button>
+          </div>
+        </div>
+        <button type="submit" style="width: 100%; padding: 14px; font-weight: 600; font-size: 0.9rem; background: linear-gradient(135deg, #3b82f6, #8b5cf6); border: none; border-radius: 8px; color: #fff; cursor: pointer; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25); transition: opacity 0.2s;">
+          Iniciar Sesión
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

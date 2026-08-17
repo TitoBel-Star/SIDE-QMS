@@ -1,0 +1,18 @@
+# Archivos del sistema y temporales
+.DS_Store
+Thumbs.db
+*.tmp
+~$*
+*.log
+
+# Entornos de desarrollo
+.gemini/
+.vscode/
+.idea/
+node_modules/
+
+# Archivos de caché y compilación
+dist/
+build/
+*.pyc
+__pycache__/
